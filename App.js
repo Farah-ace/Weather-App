@@ -56,37 +56,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 200
 
   },
-
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  textbox: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    margin: 30,
-    marginTop: 40
-  },
-  input: {
-    padding: 15,
-    height: 50,
-    fontSize: 20,
-
-    borderBottomWidth: 1,
-    borderBottomColor: '#333',
-    margin: 10
-  },
-  button: {
-    height: 45,
-    width: '80%',
-    backgroundColor: '#F4D740',
-    borderRadius: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 20
-  },
   active:{
     height: 20, 
     width: 20,
