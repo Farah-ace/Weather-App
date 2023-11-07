@@ -17,6 +17,7 @@ export default function HomeScreen(props) {
   const [response, setResponse] = useState("");
   const [days, setDays] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [date, setDate] = useState("");
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.route.params.city}&appid=0199c865dbfaf6a9c2250521d5bd7f5c&units=metric`;
 
@@ -26,6 +27,9 @@ export default function HomeScreen(props) {
   let apiDays = `https://api.openweathermap.org/data/2.5/forecast/?q=${props.route.params.city}&cnt=7&units=metric&appid=0199c865dbfaf6a9c2250521d5bd7f5c`;
   let weatherData;
   let daysData;
+let d =[]
+  //let currentDate = daysData.data.list.dt_txt;
+  //const timeArray = currentDate.split(" ");
 
 
   async function getApiData() {
@@ -41,6 +45,7 @@ export default function HomeScreen(props) {
     );
 
     setDays(daysData.data.list);
+
     setLoading(false)
   }
   useEffect(() => {
@@ -58,6 +63,10 @@ export default function HomeScreen(props) {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={{ flexDirection: 'column' }}>
+            {response ? <Text style={{ ...styles.text, marginTop: 5, marginLeft: 10, fontWeight: 'bold', fontSize: 10}}>
+                {(new Date((response.data.dt)*1000)).toDateString()}
+                </Text> : null}
+                
               {response ? <Text style={{ ...styles.text, marginTop: 5, marginLeft: 10, fontWeight: 'bold',}}>
                 {response.data.name}, {response.data.sys.country}</Text> : null}
               {response ? <Text style={{ ...styles.text, fontSize: 15, marginLeft: 15 }}>
@@ -123,11 +132,13 @@ export default function HomeScreen(props) {
 
 
                 <View style={styles.flat}>
+                  {days ? <Text style={{ ...styles.text, marginTop: 10, marginLeft: 6, fontSize: 1}}>
+                {(new Date((item.dt)*1000)).toDateString()}</Text> : null}
 
-                  {days ? <Image source={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`} style={{ height: 40, width: 40, margin: 10 }} /> : null}
+                  {days ? <Image source={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`} style={{ height: 40, width: 40, margin: 2 }} /> : null}
                   {days ? <Text style={{
                     ...styles.text,
-                    margin: 5, fontWeight: 'bold', fontSize: 15,
+                    fontWeight: 'bold', fontSize: 15, marginLeft:2
                   }}>{(item.main.temp).toFixed()}°C</Text> : <Text>show some data </Text>}
 
 
@@ -168,7 +179,7 @@ const styles = StyleSheet.create({
   },
   flat: {
     height: 120,
-    width: 60,
+    width: 70,
     //justifyContent: 'space-between',
     //flexDirection: 'row',
     flexWrap: "wrap",
